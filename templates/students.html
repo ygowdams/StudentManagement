@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management</title>
+</head>
+<body>
+    <h2>Student Information Management</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+
+        {% for student in students %}
+        <tr>
+            <td>{{ student["id"] }}</td>
+
+            <td>
+                <form action="/update/{{ student['id'] }}"
+                      method="POST">
+                    <input name="name"
+                           value="{{ student['name'] }}" required>
+                    <input name="department"
+                           value="{{ student['department'] }}" required>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+
+            <td>{{ student["email"] }}</td>
+            <td>{{ student["department"] }}</td>
+
+            <td>Use the update form</td>
+
+            <td>
+                <form action="/delete/{{ student['id'] }}"
+                      method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>
